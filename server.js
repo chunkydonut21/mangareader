@@ -16,6 +16,8 @@ const handle = app.getRequestHandler()
 app.prepare().then(() => {
     const server = express()
 
+    server.get('/', (req, res) => app.render(req, res, '/', req.query))
+
     server.get('/latest', (req, res) => app.render(req, res, '/latest', req.query))
 
     server.get('/popular', (req, res) => app.render(req, res, '/popular', req.query))
