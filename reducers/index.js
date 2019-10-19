@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
+import mangaReducer from './mangaReducer'
 
 export default combineReducers({
-    mangaReducer: () => []
+    manga: mangaReducer
 })

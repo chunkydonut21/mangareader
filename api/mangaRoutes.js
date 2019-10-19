@@ -41,8 +41,10 @@ router.get('/status/:status/:page', (req, res) => {
 
 // SINGLE MANGA & CHAPTER LIST
 router.get('/single/:manga', (req, res) => {
-    axios.get(`https://www.mangaeden.com/api/manga/${req.params.manga}/`).then(item => {
-        res.status(200).json(item.data)
+    Manga.findOne({ a: req.params.manga }).then(resp => {
+        axios.get(`https://www.mangaeden.com/api/manga/${resp.i}/`).then(item => {
+            res.status(200).json(item.data)
+        })
     })
 })
 
@@ -54,8 +56,9 @@ router.get('/chapter/:chapterId', (req, res) => {
 })
 
 //SORT BY CATEGORY
-router.get('/:cat/:page', (req, res) => {
-    Manga.paginate({ c: { $in: [req.params.cat] } }, { page: req.params.page })
+router.get('/category/:cat/:page', (req, res) => {
+    console.log('called', req.params.cat, req.params.page)
+    Manga.paginate({ c: { $in: ['Action'] } }, { page: req.params.page })
         .then(list => {
             if (!list) return res.status(404).json({ err: 'Nothing found' })
             res.status(200).json(list)

@@ -18,11 +18,17 @@ app.prepare().then(() => {
 
     server.get('/', (req, res) => app.render(req, res, '/', req.query))
 
-    server.get('/latest', (req, res) => app.render(req, res, '/latest', req.query))
+    server.get('/latest', (req, res) => app.render(req, res, '/latest', { page: req.query.page }))
 
-    server.get('/popular', (req, res) => app.render(req, res, '/popular', req.query))
+    server.get(`/popular`, (req, res) => app.render(req, res, '/popular', { page: req.query.page }))
 
     server.get('/list', (req, res) => app.render(req, res, '/list', req.query))
+
+    server.get('/manga/:slug', (req, res) => app.render(req, res, '/details', { slug: req.params.slug }))
+
+    server.get('/directory/:category', (req, res) =>
+        app.render(req, res, '/category', { category: req.params.category, page: req.query.page })
+    )
 
     server.get('/reader/:chapterId', (req, res) => app.render(req, res, '/reader', { chapterId: req.params.chapterId }))
 

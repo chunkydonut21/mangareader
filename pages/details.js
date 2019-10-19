@@ -1,19 +1,36 @@
 import React, { Component } from 'react'
+import { Row, Col, Container } from 'reactstrap'
+import Head from 'next/head'
+import PopularMangaList from '../component/PopularMangaList'
+import Footer from '../component/Footer'
+import { getSingleManga } from '../actions/index'
+import { connect } from 'react-redux'
+import Navigation from '../component/Navigation'
+import SingleMangaSection from '../component/SingleMangaSection'
 
-export default class extends Component {
-  static getInitialProps ({ query: { id } }) {
-    return { postId: id }
-  }
+class Details extends Component {
+    static async getInitialProps({ req, reduxStore, query: { slug } }) {
+        await reduxStore.dispatch(getSingleManga(req, slug))
+        return { slug: slug }
+    }
 
-  render () {
-    return (
-      <div>
-        <h1>My blog post #{this.props.postId}</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div>
+                <Head>
+                    <meta name="referrer" content="no-referrer" />
+                </Head>
+                <Navigation />
+                <Container>
+                    <SingleMangaSection />
+                </Container>
+                <Footer />
+            </div>
+        )
+    }
 }
+
+export default connect(
+    null,
+    { getSingleManga }
+)(Details)

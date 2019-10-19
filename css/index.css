@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+.header {
+    font-size: 24px;
+}
+
+.card-style {
+    border: none !important;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+}
+
+.card-style:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.img-style {
+    height: 280px;
+    width: 100%;
+}
+
+.ellipse {
+    text-overflow: ellipsis;
+}
+
+.w-20 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20% !important;
+    flex: 0 0 20% !important;
+    max-width: 20%;
+}
