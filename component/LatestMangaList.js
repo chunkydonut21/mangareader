@@ -10,7 +10,7 @@ import Router from 'next/router'
 
 class LatestMangaList extends Component {
     state = {
-        activePage: 1
+        activePage: this.props.activePage
     }
     handlePageChange = e => {
         this.setState({ activePage: e })

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Container } from 'reactstrap'
 import Head from 'next/head'
-import PopularMangaList from '../component/PopularMangaList'
 import Footer from '../component/Footer'
 import { getSingleManga } from '../actions/index'
 import { connect } from 'react-redux'
@@ -11,7 +10,7 @@ import SingleMangaSection from '../component/SingleMangaSection'
 class Details extends Component {
     static async getInitialProps({ req, reduxStore, query: { slug } }) {
         await reduxStore.dispatch(getSingleManga(req, slug))
-        return { slug: slug }
+        return { slug }
     }
 
     render() {

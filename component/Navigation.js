@@ -56,13 +56,13 @@ export class Navigation extends Component {
                                 </InputGroup>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/popular">Popular</NavLink>
+                                <NavLink href="/popular?page=1">Popular</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/latest">Latest</NavLink>
+                                <NavLink href="/latest?page=1">Latest</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/latest">Manga List</NavLink>
+                                <NavLink href="/latest?page=1">Manga List</NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>

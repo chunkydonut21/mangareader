@@ -10,7 +10,7 @@ import Router from 'next/router'
 
 class PopularMangaList extends Component {
     state = {
-        activePage: 1
+        activePage: this.props.activePage
     }
     handlePageChange = e => {
         this.setState({ activePage: e })
@@ -18,7 +18,7 @@ class PopularMangaList extends Component {
     }
 
     render() {
-        console.log(this.props.activePage, 'LOL')
+        console.log(this.props, 'LOL')
         return (
             <React.Fragment>
                 <Row>

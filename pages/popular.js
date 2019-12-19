@@ -14,7 +14,6 @@ class Popular extends Component {
     }
 
     render() {
-        console.log(this.props.page, 'XXDD')
         return (
             <div>
                 <Head>
@@ -22,7 +21,7 @@ class Popular extends Component {
                 </Head>
                 <Navigation />
                 <Container>
-                    <PopularMangaList activePage={this.props.page} />
+                    <PopularMangaList activePage={parseInt(this.props.page)} />
                 </Container>
                 <Footer />
             </div>

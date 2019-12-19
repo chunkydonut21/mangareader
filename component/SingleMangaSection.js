@@ -1,58 +1,91 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Col, Row } from "reactstrap"
+import { Col, Row, Badge, ListGroup, ListGroupItem } from "reactstrap"
+import moment from 'moment'
 import Link from "next/link"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
+import Router from "next/router"
 
 class SingleMangaSection extends Component {
     render() {
-        console.log(this.props.singleManga)
+        const { singleManga } = this.props
         return (
             <React.Fragment>
                 <Row>
                     <Col>
                         <div className="d-flex mt-5 header d-flex align-items-center">
-                            <div>{this.props.singleManga.title}</div>
+                            <div>{singleManga.title}</div>
                         </div>
                         <hr/>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={4} sm={12}>
-                        <div className="boxed" style="width: 250px; height: 350px;">
+                        <div className="boxed" style={{ width: 250, height: 350 }}>
                             <img className="img-responsive"
-                                 src={`https://cdn.mangaeden.com/mangasimg/${this.props.singleManga.image}`}
-                                 alt={this.props.singleManga.title}/>
+                                 src={`https://cdn.mangaeden.com/mangasimg/${singleManga.image}`}
+                                 alt={singleManga.title}/>
                         </div>
                     </Col>
                     <Col md={8} sm={12}>
                         <div>
-                            <span>Status</span>
-                            <span>Ongoing</span>
+                            <span>Status: </span>
+                            <strong>{singleManga.status}</strong>
                         </div>
-                        <div>
-                            <span>Other names</span>
-                            <span>Case Closed, Meitantei Conan</span>
+                        <div className="my-2">
+                            <span>Author(s): </span>
+                            <strong>{singleManga.author}</strong>
                         </div>
-                        <div>
-                            <span>Author(s)</span>
-                            <span>Aoyama Gosho</span>
+                        <div className="my-2">
+                            <span>Date of release: </span>
+                            <strong>{singleManga.released}</strong>
                         </div>
-                        <div>
-                            <span>Date of release</span>
-                            <span>1994</span>
+                        <div className="my-2">
+                            <span>Categories: </span>
+                            {singleManga.categories.map(i => <Badge className="mr-2" color="primary" onClick={() => {
+                                 Router.push({ pathname: `/directory/${i.toLowerCase().split(" ").join("-")}`, query: { page: 1 }})
+                            }}>{i}</Badge>)}
                         </div>
-                        <div>
-                            <span>Categories</span>
-                            <span>Mystery, Shounen</span>
-                        </div>
-                        <div>
-                            <span>Views</span>
-                            <span>137</span>
+                        <div className="my-2">
+                            <span>Views: </span>
+                            <strong>{singleManga.hits}</strong>
                         </div>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>
+                        <div className="d-flex mt-5 header d-flex align-items-center">
+                            <div>Chapters</div>
+                        </div>
+                        <hr/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <ListGroup>
+                            {
+                                singleManga.chapters.map((i) => {
+                                    return (
+                                        <Link
+                                            href={{
+                                                pathname: '/reader',
+                                                query: { chapterId: i[3] }
+                                            }}
+                                            as={`/reader/${i[3]}`}
+                                        >
+                                            <ListGroupItem className="d-flex justify-content-between">
+                                                <div>{singleManga.title} <em className="ml-3">Chapter</em> - <strong>{i[0]}</strong>
+                                                </div>
+                                                <div>{moment(i[1]).format("YYYY-MM-DD")}</div>
+                                            </ListGroupItem>
+
+                                        </Link>
+                                    )
+                                })
+                            }
+                        </ListGroup>
+                    </Col>
+                </Row>
+
             </React.Fragment>
         )
     }
